@@ -13,7 +13,7 @@ from pikapy.jibber import *
 from pikapy.ptcexceptions import *
 
 BASE_URL = "https://club.pokemon.com/us/pokemon-trainer-club"
-CHROME_EXECUTABLE_PATH='/usr/bin/chromium-browser'
+CHROME_EXECUTABLE_PATH='/usr/bin/chromium-browser' # set to '' for autosearch
 
 # endpoints taken from PTCAccount
 SUCCESS_URLS = (
@@ -107,9 +107,8 @@ def create_account(username, password, email, birthday):
         _validate_password(password)
 
     print("Attempting to create user {user}:{pw}. Opening browser...".format(user=username, pw=password))
-    if (CHROME_EXECUTABLE_PATH!=""):
-        chrome_options = Options()
-        chrome_options.setBinary(CHROME_EXECUTABLE_PATH);
+    chrome_options = Options()
+    chrome_options.binary_location=CHROME_EXECUTABLE_PATH
     driver = webdriver.Chrome()
     driver.set_window_size(600, 600)
 
